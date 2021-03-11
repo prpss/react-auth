@@ -56,12 +56,28 @@ function App() {
     )
     
     function Home() {
-        return (
-            <div>
-                <h2>home</h2>
-                <SignupForm />
-            </div>
-        );
+
+        function loggedin({location})
+        {
+            if (Userfront.accessToken())
+            {
+                return (
+                    <Redirect to={{pathname: "/dashboard", state: {from: location}}}/>
+                );
+            }
+            else
+            {
+                return (
+                    <div>
+                        <h2>home</h2>
+                        <SignupForm />
+                    </div>
+                );
+
+            }
+        }
+
+            return <Route render={loggedin} />;
     }
         
     function Login() {
@@ -97,16 +113,16 @@ function App() {
             return (
                 <div>
                     <h2>DASHBOARD</h2>
+                    <h4>logged in</h4>
                     <pre>{data}</pre>
                     <button onClick={Userfront.logout}>Logout</button>
                 </div>
             );
             
         }
+        
 
-        return (
-            <Route render={checking}/>
-        );
+        return <Route render={checking} />;
     }
 }
 
