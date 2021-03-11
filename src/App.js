@@ -1,5 +1,20 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import Userfront from "@userfront/react";
+
+Userfront.init(process.env.REACT_APP_trialid);
+
+const SignupForm = Userfront.build({
+  toolId: "bmakal"
+});
+
+const LoginForm = Userfront.build({
+  toolId: "ldlrlk"
+});
+
+const PasswordReset = Userfront.build({
+    toolId: "nakmkk"
+})
 
 function App() {
     return (
@@ -16,6 +31,9 @@ function App() {
               <li>
                   <Link to="/reset">Reset</Link>
               </li>
+              <li>
+                  <Link to="/dashboard">Dashboard</Link>
+              </li>
           </nav>
 
        
@@ -25,6 +43,9 @@ function App() {
                 </Route>
                  <Route path="/reset">
                     <Reset />
+                    </Route>
+                <Route path="/dashboard">
+                    <Dashboard />
                 </Route>
                 <Route path="/">
                     <Home />
@@ -35,15 +56,57 @@ function App() {
     )
     
     function Home() {
-        return <h2>home</h2>;
+        return (
+            <div>
+                <h2>home</h2>
+                <SignupForm />
+            </div>
+        );
     }
         
     function Login() {
-        return <h2>login</h2>;
+        return (
+            <div>
+                <h2>login</h2>
+                <LoginForm />
+            </div>
+        );
     }
         
     function Reset() {
-        return <h2>reset</h2>;
+        return (
+            <div>
+                <h2>reset</h2>
+                <PasswordReset />
+            </div>
+        );
+    }
+
+    function Dashboard() {
+        function checking({ location })
+        {
+            if (!Userfront.accessToken())
+            {
+                <h4>not logged in</h4>
+                return (
+                    <Redirect to={{ pathname: "/login", state: { from:  location  }}}/>
+                )
+            }
+
+            const data = JSON.stringify(Userfront.user, null, 2);
+            return (
+                <div>
+                    <h2>DASHBOARD</h2>
+                    <pre>{data}</pre>
+                    <button onClick={Userfront.logout}>Logout</button>
+                </div>
+            );
+            
+        }
+
+        return (
+            <Route render={checking}/>
+        );
     }
 }
 
