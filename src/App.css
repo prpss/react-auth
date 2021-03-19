@@ -1,14 +1,35 @@
-.App {
-    text-align: center;
-    padding-top: 20px;
-}
-
-h2 {
-    display: flex;
-    justify-content: center;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-li {
-    color: blue;
-}
+    .App {
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: blanchedalmond;
+    }
+    
+    h2 {
+        display: flex;
+        justify-content: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    
+    nav {
+        display: flex;
+        justify-content: space-evenly;
+        padding: 5px;
+    }
+    
+    button {
+        background-color: antiquewhite;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 500;
+        font-style: oblique;
+        border-radius: 5px;
+    }
+    
+    button :link {
+        text-decoration: none;
+    }
+    
+    [class *="card-"] h2 {
+        font-size: 28px;
+        text-shadow: 3px 0 0 burlywood;
+    }

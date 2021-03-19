@@ -21,19 +21,19 @@ function App() {
     <Router>
     <div className="App">
           {/* <h4>checking</h4> */}
-          <nav>
-              <li>
+         <nav>
+              <button>
                   <Link to="/">Home</Link>
-              </li>
-              <li>
+              </button>
+              <button>
                   <Link to="/login">Login</Link>
-                    </li>
-              <li>
+                    </button>
+              <button>
                   <Link to="/reset">Reset</Link>
-              </li>
-              <li>
+              </button>
+              <button>
                   <Link to="/dashboard">Dashboard</Link>
-              </li>
+              </button>
           </nav>
 
        
@@ -69,7 +69,9 @@ function App() {
             {
                 return (
                     <div>
-                        <h2>home</h2>
+                        <div className="card-1">
+                            <h2>home</h2>
+                        </div>
                         <SignupForm />
                     </div>
                 );
@@ -83,7 +85,9 @@ function App() {
     function Login() {
         return (
             <div>
-                <h2>login</h2>
+                <div className="card-2">
+                     <h2>login</h2>
+                </div>
                 <LoginForm />
             </div>
         );
@@ -92,7 +96,9 @@ function App() {
     function Reset() {
         return (
             <div>
-                <h2>reset</h2>
+                <div className="card-2">
+                    <h2>reset</h2>
+                </div>
                 <PasswordReset />
             </div>
         );
@@ -112,8 +118,10 @@ function App() {
             const data = JSON.stringify(Userfront.user, null, 2);
             return (
                 <div>
-                    <h2>DASHBOARD</h2>
-                    <h4>logged in</h4>
+                    <div className="card-3">
+                        <h2>DASHBOARD</h2>
+                        <h4>logged in</h4>
+                    </div>
                     <pre>{data}</pre>
                     <button onClick={Userfront.logout}>Logout</button>
                 </div>
