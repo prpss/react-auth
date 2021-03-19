@@ -1,20 +1,12 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import Home from './components/Home'
+import Login from './components/Login'
+import Reset from './components/Reset'
+import Dashboard from './components/Dashboard'
 import Userfront from "@userfront/react";
 
 Userfront.init(process.env.REACT_APP_trialid);
-
-const SignupForm = Userfront.build({
-  toolId: "bmakal"
-});
-
-const LoginForm = Userfront.build({
-  toolId: "ldlrlk"
-});
-
-const PasswordReset = Userfront.build({
-    toolId: "nakmkk"
-})
 
 function App() {
     return (
@@ -53,85 +45,7 @@ function App() {
             </Switch>
      </div>
     </Router>
-    )
-    
-    function Home() {
-
-        function loggedin({location})
-        {
-            if (Userfront.accessToken())
-            {
-                return (
-                    <Redirect to={{pathname: "/dashboard", state: {from: location}}}/>
-                );
-            }
-            else
-            {
-                return (
-                    <div>
-                        <div className="card-1">
-                            <h2>home</h2>
-                        </div>
-                        <SignupForm />
-                    </div>
-                );
-
-            }
-        }
-
-            return <Route render={loggedin} />;
-    }
-        
-    function Login() {
-        return (
-            <div>
-                <div className="card-2">
-                     <h2>login</h2>
-                </div>
-                <LoginForm />
-            </div>
-        );
-    }
-        
-    function Reset() {
-        return (
-            <div>
-                <div className="card-2">
-                    <h2>reset</h2>
-                </div>
-                <PasswordReset />
-            </div>
-        );
-    }
-
-    function Dashboard() {
-        function checking({ location })
-        {
-            if (!Userfront.accessToken())
-            {
-                <h4>not logged in</h4>
-                return (
-                    <Redirect to={{ pathname: "/login", state: { from:  location  }}}/>
-                )
-            }
-
-            const data = JSON.stringify(Userfront.user, null, 2);
-            return (
-                <div>
-                    <div className="card-3">
-                        <h2>DASHBOARD</h2>
-                        <h4>logged in</h4>
-                    </div>
-                    <pre>{data}</pre>
-                    <button onClick={Userfront.logout}>Logout</button>
-                </div>
-            );
-            
-        }
-        
-
-        return <Route render={checking} />;
-    }
+    )       
 }
 
 export default App;
